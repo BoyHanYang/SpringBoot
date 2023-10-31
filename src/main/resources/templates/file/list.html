@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>用户列表</title>
+  <style>
+    /* 添加一些基本的样式 */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+      text-align: center;
+    }
+    .table-button {
+      text-align: center;
+    }
+    .table-button a {
+      margin: 0 5px;
+      text-decoration: none;
+    }
+    .table-button a:first-child{
+      background-color: #4CAF50;
+      color: #fff;
+    }
+    .table-button a:last-child{
+      background-color: #f44336;
+      color: #fff;
+    }
+
+    .error{
+      color: red;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .img img{
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+<h1>文件列表</h1>
+<a th:href="@{/file/add}">上传文件</a>
+<span class="error" th:text="${message}"></span>
+<table>
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>预览</th>
+    <th>文件名</th>
+    <th>大小</th>
+    <th>上传时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="file, stat : ${list}">
+    <td th:text="${stat.count}"></td>
+    <td class="img"><img th:src="@{${file.path}}" /></td>
+    <td th:text="${file.name}"></td>
+    <td th:text="${file.size}"></td>
+    <td th:text="${file.createTime}"></td>
+    <td class="table-button">
+      <a th:href="@{'' + ${file.path}}" target="_blank">查看</a>
+    </td>
+  </tr>
+  <!-- 添加更多用户行 -->
+  </tbody>
+</table>
+</body>
+</html>

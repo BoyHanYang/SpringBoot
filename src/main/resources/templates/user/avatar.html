@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上传文件</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      /*background: url('background.jpg') no-repeat center center fixed;*/
+      background-color: #f4f4f4;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .upload-container {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      max-width: 400px;
+      text-align: center;
+    }
+    .upload-container h2 {
+      margin-top: 0;
+    }
+    .upload-form {
+      display: flex;
+      flex-direction: column;
+    }
+    .upload-input {
+      margin: 10px 0;
+    }
+    .upload-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .upload-button:hover {
+      background-color: #0056b3;
+    }
+    .success{
+      color: green;
+      font-size: 20px;
+    }
+  </style>
+  </style>
+</head>
+<body>
+<div class="upload-container">
+  <h2>上传文件</h2>
+  <p class="success" th:text="${message}"></p>
+  <form class="upload-form" th:action="@{/user/avatar}" method="post" enctype="multipart/form-data">
+    <input type="file" name="img" class="upload-input" required accept="image/*">
+    <input type="submit" value="上传">
+  </form>
+</div>
+
+<script>
+  // 获取 success 元素
+  const success = document.querySelector('.success');
+
+  // innerText 获取元素的文本内容
+  if (success.innerText != ''){
+    // 弹出提示框
+    alert(success.innerText);
+    // 最外层 刷新页面
+    window.top.location.reload();
+  }
+
+</script>
+</body>
+</html>

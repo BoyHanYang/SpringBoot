@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>注册页面</title>
+    <link rel="stylesheet" href="2.css">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: #34495e;
+        }
+        .box{
+            width: 300px;
+            padding: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: #191919;
+            text-align: center;
+        }
+        .box h1{
+            color: white;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .box input[type = "text"],.box input[type = "password"]{
+            border:0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 14px 10px;
+            width: 200px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+        }
+        .box input[type = "text"]:focus,.box input[type = "password"]:focus{
+            width: 280px;
+            border-color: #2ecc71;
+        }
+        .box input[type = "text"],.box input[type = "name"]{
+            border:0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 14px 10px;
+            width: 200px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+        }
+        .box input[type = "text"]:focus,.box input[type = "name"]:focus{
+            width: 280px;
+            border-color: #2ecc71;
+        }
+        .box input[type = "submit"]{
+            border:0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #2ecc71;
+            padding: 14px 40px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+        .box input[type = "submit"]:hover{
+            background: #2ecc71;
+        }
+
+        .box .meassage{
+            text-transform: uppercase;
+            color:white;
+        }
+        .box input[type = "text"]:focus,.box input[type = "idcard"]:focus{
+            width: 280px;
+            border-color: #2ecc71;
+        }
+        .box input[type = "text"],.box input[type = "idcard"]{
+            border:0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 14px 10px;
+            width: 200px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+        }.box input[type = "text"]:focus,.box input[type = "phone"]:focus{
+             width: 280px;
+             border-color: #2ecc71;
+         }
+        .box input[type = "text"],.box input[type = "phone"]{
+            border:0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 14px 10px;
+            width: 200px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+        }
+        .checkboxmessage{
+            color:white;
+            font-size:18px;
+        }
+        .tips{
+            color:white;
+            font-size:12px;
+        }
+
+    </style>
+    <script>
+        function $(id){
+            return document.getElementById(id);
+        }
+        function test(){
+            var test1 = $("test1").value;
+            var test2 = $("test2").value;
+            var test3 = $("test3").value;
+            var test4 = $("test4").value;
+
+            if(test1.length == 0){
+                $("span1").innerHTML = "用户名不能为空";
+                $("test1").focus();
+                return false;
+            }else{
+                $("span1").innerHTML = "✔";
+            }
+            if(test1.length > 0 && test1.length < 4){
+                $("span1").innerHTML = "用户名长度至少4个字符";
+                $("test1").focus();
+                return false;
+            }else{
+                $("span1").innerHTML = "✔";
+            }
+            if(test1.length > 16){
+                $("span1").innerHTML = "用户名不能超过16个字符";
+                $("test1").focus()
+                return false;
+            }else{
+                $("span1").innerHTML = "✔";
+            }
+            if(test2.length == 0){
+                $("span2").innerHTML = "密码不能为空";
+                $("test2").focus();
+                return false;
+            }else{
+                $("span2").innerHTML = "✔";
+            }
+            if(test2.length > 0 && test2.length < 4){
+                $("span2").innerHTML = "密码长度至少为4个字符";
+                $("test2").focus();
+                return false;
+            }else{
+                $("span2").innerHTML = "✔";
+            }
+            if(test2.length > 16){
+                $("span2").innerHTML = "密码长度不能超过16个字符";
+                $("test2").focus();
+                return false;
+            }
+            if(test2 != test3){
+                $("span3").innerHTML = "两次输入密码不一致";
+                $("test3").focus();
+                return false;
+            }else{
+                $("span3").innerHTML = "✔";
+            }
+            if(test4.length == 0){
+                $("span4").innerHTML = "邮箱不能为空！";
+                $("test4").focus();
+                return false;
+            }else{
+                $("span4").innerHTML = "✔";
+            }
+            alert("注册成功！");
+        }
+
+    </script>
+</head>
+<body>
+<form id="form" name="form" class="box" onsubmit="return test()" th:action="@{/signUp}"  method="post">
+    <h1>注册页面</h1>
+    <input id="test1" type="text" name="username" placeholder="用户名" >
+    <span id="span1" type="t1" class="tips">*用户名为4-16长度字符</span>
+    <input id="test2" type="password" name="password" placeholder="密码">
+    <span id="span2" type="t2" class="tips">*密码为4-16字符</span>
+    <input id="test3" type="password" name="repassword" placeholder="确认密码">
+    <span id="span3" type="t2" class="tips">*应与密码一致</span>
+    <input id="test4" type="name" name="name" placeholder="真实姓名">
+    <span id="span4" type="t3" class="tips">*姓名不能为空</span>
+    <div class="form-group captcha">
+        <label for="captcha"></label>
+        <input type="text" id="captcha" name="captcha" required placeholder="验证码">
+        <img th:src="@{captcha}" alt="验证码">
+    </div>
+<!--    <input type="idcard" name="" placeholder="身份证">-->
+<!--    <span type="t4" class="tips"></span>-->
+<!--    <input type="phone" name="" placeholder="手机号">-->
+    <input type="submit" name="" value="注册">
+    <p class="meassage">已经注册完了？<a href="登录页面.html">登录</a>
+    </p>
+
+</form>
+</body>
+</html>

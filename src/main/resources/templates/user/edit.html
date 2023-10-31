@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改</title> <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+<div class="login-container">
+    <h2>修改 <b th:text="${user.userName}"></b> 用户信息</h2>
+    <form th:action="@{/user/edit}" method="post">
+        <input type="hidden" name="id" th:value="${user.id}" readonly/>
+        <div class="form-group">
+            <label for="name">真实姓名:</label>
+            <input type="text" id="name" name="nickName" required th:value="${user.nickName}">
+        </div>
+        <div class="form-group">
+            <p class="error" th:text="${message}"></p>
+            <br/>
+            <input type="submit" value="提交">
+        </div>
+    </form>
+</div>
+</body>
+</html>

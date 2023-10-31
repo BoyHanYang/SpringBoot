@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>用户列表</title>
+  <style>
+    /* 添加一些基本的样式 */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+      text-align: center;
+    }
+    .table-button {
+      text-align: center;
+    }
+    .table-button a {
+      margin: 0 5px;
+      border: 1px solid #ccc;
+      padding: 2px 5px;
+      text-decoration: none;
+    }
+    .table-button a:first-child{
+      background-color: #4CAF50;
+      color: #fff;
+    }
+    .table-button a:last-child{
+      background-color: #f44336;
+      color: #fff;
+    }
+
+    .error{
+      color: red;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+<h1>用户列表</h1>
+<span class="error" th:text="${message}"></span>
+<table>
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>用户名</th>
+    <th>真实姓名</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- 使用示例数据，你可以替换为实际的用户数据
+    for(User user : list){
+
+    }
+  -->
+  <tr th:each="user, stat : ${list}">
+    <td th:text="${stat.count}"></td>
+    <td th:text="${user.userName}"></td>
+    <td th:text="${user.nickName}"></td>
+    <td class="table-button">
+      <a th:href="@{/user/edit(id=${user.id})}">修改</a>
+<!--      <a th:href="@{'/user/delete/' + ${user.id}}">删除</a>-->
+      <a th:href="@{/user/delete/{id}(id=${user.id})}">删除</a>
+    </td>
+  </tr>
+  <!-- 添加更多用户行 -->
+  </tbody>
+</table>
+</body>
+</html>

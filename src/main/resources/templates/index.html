@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: start;
+            align-items: flex-start;
+            height: 100vh;
+        }
+        .welcome-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+        .welcome-container h2 {
+            margin-top: 0;
+        }
+        .function-list {
+            list-style: none;
+            padding: 0;
+        }
+        .function-list li {
+            margin: 10px 0;
+        }
+        .content{
+            width: 100%;
+            height: 100%;
+        }
+        .action{
+            background-color: #209a22;
+            padding: 10px 0;
+        }
+
+        .action a{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="welcome-container">
+    <h2>欢迎！</h2>
+    <p>
+        <!--     th:src  th:href  th:action   @{}  将路径解析成绝对路径   -->
+        <img th:src="@{${session.login_user != null?  session.login_user.avatar : '/upload/default.jpg'}}" width="100" height="100" alt="头像">
+    </p>
+    <p><span th:text="${session.login_user != null?  session.login_user.nickName : 'XXXX'}">XXX</span>,您已成功登录。</p>
+    <h3>功能列表</h3>
+    <ul class="function-list">
+        <li><a th:href="@{/file/list}" target="main">文件列表</a></li>
+        <li class="action"><a th:href="@{/file/add}" target="main">上传文件</a></li>
+        <li><a href="javascript:void(0)" target="main">在线用户</a></li>
+        <li><a th:href="@{/user/list}" target="main">用户列表</a></li>
+        <li><a th:href="@{/user/avatar}" target="main">修改头像</a></li>
+    </ul>
+    <p><a href="logout">退出登录</a></p>
+</div>
+<div class="content">
+    <iframe src="" id="main" name="main" frameborder="0" width="100%" height="100%"></iframe>
+</div>
+
+<script>
+    // 获取所有的菜单
+    var menus = document.querySelectorAll(".function-list li")
+
+    // 遍历
+    for(var i = 0; i < menus.length; i++){
+        // 给每个菜单添加点击事件
+        menus[i].onclick = function(){
+            // 将原来页面取消掉
+            document.querySelector(".action").classList.remove("action");
+            // 将当前页面设置为选中状态
+            this.classList.add("action")
+        }
+    }
+</script>
+</body>
+</html>
